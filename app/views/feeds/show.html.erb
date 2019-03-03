@@ -1,0 +1,18 @@
+<div style="text-align: center;">
+    <%= link_to 'Return to Feed List', feeds_path %>
+</div>
+
+<hr/>
+
+<div style="text-align: center;">
+    <h1><%= @feed.title %></h1>
+    <h3><%= @feed.description %></h3>
+    <h5><%= @feed.copyright.nil? ? "No copyright statement in RSS." :  @feed.copyright.html_safe %></h5>
+</div>
+
+<hr/>
+
+<% @items.each do |item| %>
+    <p><%= item.published_at %> --- <%= item.title %> --- <%= item.score %></p>
+    <hr/>
+<% end %>

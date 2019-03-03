@@ -1,0 +1,2 @@
+class LexiconsController < ApplicationController
+end

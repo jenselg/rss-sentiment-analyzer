@@ -1,0 +1,10 @@
+<tr>
+    <td>
+        <%= feed.title %>
+    </td>
+    <td>
+        <a href="<%= feed.link %>" target="_blank">RSS Link</a>&nbsp;&bull;&nbsp;
+        <%= link_to 'View Feed Items', feed_path(feed) %>&nbsp;&bull;&nbsp;
+        <%= link_to 'Delete Feed', feed_path(feed), method: :delete, data: { confirm: 'Are you sure you want to delete this feed?' } %>
+    </td>
+</tr>

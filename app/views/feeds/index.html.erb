@@ -1,0 +1,47 @@
+<div style="text-align: center;">
+    <h1>Sentiment Statistics</h1>
+    <h4>Sentiment range from -100 to 100, for each RSS feed item; negative to positive sentiment, respectively.</h4>
+</div>
+
+<br/>
+
+<div style="text-align: center;">
+    <%= scatter_chart Item.pluck(:published_epoch, :score), xtitle: "Time in Epoch", ytitle: "Sentiment Score" %>
+    <br/>
+    <%= line_chart @feeds.map { |feed|
+        {name: "Positive Vector", data: feed.positive_vector }
+    } %>
+</div>
+
+<hr/>
+
+<div style="text-align: center;">
+    <h1>Feed List</h1>
+    <%= form_for @feed do |f| %>
+        RSS URL: <%= f.text_field :link %>
+    <%= f.submit "Add Feed" %>
+    <% end %>
+    <% unless flash[:notice].nil? %>
+        <p><%= flash[:notice] %></p>
+    <% end %>
+</div>
+
+<br/>
+
+<div>
+    <% unless @feeds.empty? %>
+        <table style="margin: auto;">
+            <thead>
+                <th>Feed</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <% @feeds.each do |feed| %>
+                    <%= render partial: 'feeds/feed', locals: { feed: feed } %>
+                <% end %>
+            </tbody>
+        </table>
+    <% end %>
+</div>
+
+<br/>
